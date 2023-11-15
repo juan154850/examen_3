@@ -48,7 +48,7 @@ const handleSearch = async () => {
     weather.style.display = "none";
   } else if (data.cod === 200) {
     // Mostramos los datos especificos de la ciudad.
-    temp.innerHTML = `${data.main.temp}°C`;
+    temp.innerHTML = `${parseInt(data.main.temp)}°C`;
     console.log(data.name);
     city.innerHTML = `${data.name}`;
     humidity.innerHTML = `${data.main.humidity}%`;
