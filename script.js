@@ -10,6 +10,7 @@ const city = document.querySelector(`.city`);
 const humidity = document.querySelector(`.humidity`);
 const wind = document.querySelector(`.wind`);
 const weatherIcon = document.querySelector(`.weather-icon`);
+const searchInput = document.querySelector(".search");
 
 const weathers = {
   Clouds: "images/clouds.png",
@@ -35,14 +36,11 @@ const getWeather = async (city) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error);
     throw new Error(error);
   }
 };
 
-// La función se dispara cuando se le da click al botón de buscar, para esto debemos agregarle un ID.
-const searchBtn = document.querySelector(`[class="search"] > button`);
-searchBtn.addEventListener("click", async () => {
+const handleSearch = async () => {
   const searchedCity = getCity();
   let data = await getWeather(searchedCity.toLowerCase());
   if (data.cod === "404") {
@@ -59,10 +57,16 @@ searchBtn.addEventListener("click", async () => {
     weather.style.display = "block";
     error.style.display = "none";
   }
+};
+
+// La función se dispara cuando se le da click al botón de buscar, para esto debemos agregarle un ID.
+const searchBtn = document.querySelector(`[class="search"] > button`);
+searchBtn.addEventListener("click", async () => {
+  await handleSearch();
 });
 
-// searchInput.addEventListener("keypress", function (event) {
-//   if (event.key === "Enter") {
-//     handleSearch();
-//   }
-// });
+searchInput.addEventListener("keypress", async function (event) {
+  if (event.key === "Enter") {
+    await handleSearch();
+  }
+});
