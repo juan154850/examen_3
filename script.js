@@ -43,17 +43,26 @@ const getWeather = async (city) => {
 // La función se dispara cuando se le da click al botón de buscar, para esto debemos agregarle un ID.
 const searchBtn = document.querySelector(`[class="search"] > button`);
 searchBtn.addEventListener("click", async () => {
-  const city = getCity();
-  let data = await getWeather(city.toLowerCase());
+  const searchedCity = getCity();
+  let data = await getWeather(searchedCity.toLowerCase());
   if (data.cod === "404") {
     error.style.display = "block";
+    weather.style.display = "none";
   } else if (data.cod === 200) {
     // Mostramos los datos especificos de la ciudad.
-    weather.style.display = "block";
     temp.innerHTML = `${data.main.temp}°C`;
+    console.log(data.name);
     city.innerHTML = `${data.name}`;
     humidity.innerHTML = `${data.main.humidity}%`;
     wind.innerHTML = `${data.wind.speed} km/h`;
     weatherIcon.setAttribute("src", `${weathers[data.weather[0].main]}`);
+    weather.style.display = "block";
+    error.style.display = "none";
   }
 });
+
+// searchInput.addEventListener("keypress", function (event) {
+//   if (event.key === "Enter") {
+//     handleSearch();
+//   }
+// });
