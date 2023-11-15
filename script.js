@@ -52,7 +52,7 @@ const handleSearch = async () => {
     console.log(data.name);
     city.innerHTML = `${data.name}`;
     humidity.innerHTML = `${data.main.humidity}%`;
-    wind.innerHTML = `${data.wind.speed} km/h`;
+    wind.innerHTML = `${data.wind.speed} km/h`;    
     weatherIcon.setAttribute("src", `${weathers[data.weather[0].main]}`);
     weather.style.display = "block";
     error.style.display = "none";
